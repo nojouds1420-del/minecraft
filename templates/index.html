@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة سيرفر ماينكرافت — مباشر</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="signal-strip" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="server-id">
+      <span class="live-dot" id="live-dot"></span>
+      <div>
+        <h1 id="server-name">VeinMC</h1>
+        <p class="motd" id="server-motd">جاري الاتصال بالسيرفر…</p>
+      </div>
+    </div>
+    <div class="topbar-meta">
+      <div class="meta-chip"><span class="meta-label">النسخة</span><span class="meta-value" id="server-version">—</span></div>
+      <div class="meta-chip"><span class="meta-label">البينغ</span><span class="meta-value" id="server-latency">—</span></div>
+      <div class="meta-chip" id="conn-chip"><span class="meta-label">الحالة</span><span class="meta-value" id="server-online">—</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="dashboard">
+
+  <section class="hero" aria-label="عدد اللاعبين الحاليين">
+    <div class="hero-label">اللاعبون المتصلون الآن</div>
+    <div class="hero-number" id="online-count">—</div>
+    <div class="pulse-bar" id="pulse-bar" aria-hidden="true"></div>
+    <div class="hero-sub" id="hero-source">مصدر البيانات: —</div>
+  </section>
+
+  <section class="panel" aria-labelledby="games-heading">
+    <div class="panel-head">
+      <h2 id="games-heading">ألعاب السيرفر</h2>
+      <span class="panel-hint">اضغط على أي لعبة لعرض ترتيبها</span>
+    </div>
+    <div class="games-grid" id="games-grid">
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+    </div>
+  </section>
+
+  <section class="panel accent-panel" aria-labelledby="topkills-heading">
+    <div class="panel-head">
+      <h2 id="topkills-heading">توب كيلز</h2>
+      <span class="panel-hint" id="topkills-source">—</span>
+    </div>
+    <ol class="leader-list" id="topkills-list">
+      <li class="skeleton-row"></li>
+      <li class="skeleton-row"></li>
+      <li class="skeleton-row"></li>
+    </ol>
+  </section>
+
+  <section class="panel" aria-labelledby="lb-heading">
+    <div class="panel-head">
+      <h2 id="lb-heading">ترتيب <span id="selected-game-name">اللعبة</span></h2>
+      <span class="panel-hint" id="board-hint">—</span>
+    </div>
+    <div class="tab-row sub-tabs" id="board-tabs"></div>
+    <ol class="leader-list" id="board-list">
+      <li class="empty-state">اختر لعبة من الأعلى لعرض ترتيبها</li>
+    </ol>
+  </section>
+
+   <section class="panel" aria-labelledby="links-heading">
+    <div class="panel-head">
+      <h2 id="links-heading">روابط مهمة</h2>
+      <span class="panel-hint">تابعنا وتعرف على السيرفر أكثر</span>
+    </div>
+    <div class="links-grid">
+
+      <a class="link-card" href="#" target="_blank" rel="noopener">
+        <div class="link-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l-1.5 11h-13L4 8Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg>
+        </div>
+        <div class="link-title">المتجر</div>
+        <div class="link-desc">رتب مميزة ومحتوى داخل السيرفر</div>
+      </a>
+
+      <a class="link-card" href="#" target="_blank" rel="noopener">
+        <div class="link-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8c3-1.5 7-1.5 10 0"/><path d="M5 17c1-4 2-8 3-9.5 2-1 6-1 8 0 1 1.5 2 5.5 3 9.5"/><circle cx="9" cy="14" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="14" r="1.2" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <div class="link-title">ديسكورد</div>
+        <div class="link-desc">انضم لمجتمعنا وتابع آخر الأخبار</div>
+      </a>
+
+       <a class="link-card text-left-card" href="#" target="_blank" rel="noopener" dir="ltr">
+        <!--<div class="link-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><circle cx="12" cy="16" r="0.6" fill="currentColor" stroke="none"/></svg>
+        </div>-->
+        <div class="link-title">Welcome to the Kingdom of Vein!</div>
+        <div class="link-desc">In this realm where legends rise, champions fight, and glory is claimed. Within this kingdom you will have the most thrilling experience of your lifetime, this kingdom is made for those who seek honor, fun, and legend status. Vein is more than a community, it is a family made to harbor every warrior seeking a place to belong.</div>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="page-footer">
+  <p>تجريبي </p>
+</footer>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
